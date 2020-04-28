@@ -1,6 +1,11 @@
 const mqtt = require('mqtt');
 const si = require('systeminformation');
-const date = new Date();
+let date = new Date();
+
+// uzmemo url prenesen preko argumenta, ako nije prenesen pretpostavimo na je localhostu i portu 1883
+let url = 'mqtt://localhost:1883';
+if (process.argv.length > 2)
+	url = process.argv[2];
 
 // funkcija koja izvlaci vrednosti temperature i clocka pomocu systeminformation i salje na sitewhere input topic
 async function measureAndSend() {
@@ -22,10 +27,12 @@ async function measureAndSend() {
 	client.publish('SiteWhere/input/json', JSON.stringify(payload));
 }
 
-// konektujemo se na mqtt, podrazumevamo da je na localhostu i portu 1883
-let client = mqtt.connect('mqtt://localhost:1883');
+console.log(url);
+
+// konektujemo se na mqtt
+let client = mqtt.connect(url);
 
 // ako je konekcija uspesna, namestimo da salje podatke svakih 5 sekundi
 client.on('connect', function() {
-	let timer = setInterval(measureAndSend, 5000);
+	timer = setInterval(measureAndSend, 5000);
 });
