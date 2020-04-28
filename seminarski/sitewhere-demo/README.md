@@ -4,7 +4,7 @@
 
 Šalje na SiteWhere izmerene vrednosti temperature i trenutnog clock-a procesora.  
 
-**Zahteva specifično prethodno podešenu SiteWhere platformu (tenant, site, specifikacija, registrovan uredjaj).**  
+**Zahteva specifično podešenu SiteWhere platformu (tenant, site, specifikacija, registrovan uredjaj).**  
 Pokretanje:  
 `npm install`  
-`node index.js`  
+`node index.js [mqtt url]`
