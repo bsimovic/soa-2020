@@ -1,0 +1,10 @@
+{
+  "name": "sitewhere-demo",
+  "description": "Demo aplikacija za SiteWhere 1 platformu",
+  "main": "index.js",
+  "author": "bsimovic",
+  "dependencies": {
+    "mqtt": "^4.0.0"
+  },
+  "private": true
+}
