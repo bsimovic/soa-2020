@@ -1,11 +1,10 @@
-## SiteWhere 1 Demo aplikacija
+## SiteWhere 1 demo aplikacija
 
-*Branko Simović 16326*
+*Branko Simović 16326*  
 
+Šalje na SiteWhere izmerene vrednosti temperature i trenutnog clock-a procesora.  
+
+**Zahteva specifično prethodno podešenu SiteWhere platformu (tenant, site, specifikacija, registrovan uredjaj).**  
 Pokretanje:  
 `npm install`  
 `node index.js`  
-
-**Zahteva specifično prethodno podešenu SiteWhere platformu (tenant, specifikacija, itd.).**  
-
-Podrazumevani port za MQTT je 1883 a za SiteWhere api 8080.  
