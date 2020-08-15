@@ -1,0 +1,13 @@
+{
+  "name": "device-microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bsimovic",
+  "dependencies": {
+    "csv-parse": "^4.12.0",
+    "moleculer": "^0.14.9",
+    "mqtt": "^4.2.0"
+  }
+}
