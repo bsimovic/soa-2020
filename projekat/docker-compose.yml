@@ -1,0 +1,72 @@
+version: "3.3"
+
+services:
+  device:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-device"
+      SERVICES: device
+    depends_on:
+      - nats
+    ports:
+  
+  device:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-data"
+      SERVICES: data
+    depends_on:
+      - nats
+      - influx
+    ports:
+
+  analytics:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-analytics"
+      SERVICES: analytics
+    depends_on:
+      - nats
+
+  command:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-command"
+      SERVICES: command
+    depends_on:
+      - nats
+
+  gateway:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-gateway"
+      SERVICES: gateway
+    depends_on:
+      - nats
+    ports:
+      - 3000:3000
+
+  nats:
+    image: nats:latest
+  
+  influx:
+    image: influxdb
+    environment:
+      - INFLUXDB_ADMIN_ENABLED=true
+    volumes:
+      - baza:/var/lib/influx.db
+    ports:
+      - 8086:8086
+    
+volumes:
+  baza:
