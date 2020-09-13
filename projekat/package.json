@@ -1,0 +1,12 @@
+{
+  "name": "soa-projekat",
+  "description": "Potrošnja električne energije u SAD-u",
+  "author": "bsimovic",
+  "private": true,
+  "dependencies": {
+    "moleculer": "^0.14.10"
+  },
+  "scripts": {
+    "start": "moleculer-runner"
+  }
+}
