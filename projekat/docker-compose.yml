@@ -18,9 +18,10 @@ services:
     environment:
       NODEID: "node-data"
       SERVICES: data
+
     depends_on:
       - nats
-      - influx
+      - mongo
 
   analytics:
     build:
@@ -57,14 +58,10 @@ services:
   nats:
     image: nats:latest
   
-  influx:
-    image: influxdb
-    environment:
-      - INFLUXDB_ADMIN_ENABLED=true
+  mongo:
+    image: mongo:latest
     volumes:
-      - baza:/var/lib/influx.db
-    ports:
-      - 8086:8086
+      - baza:/baza/db
     
 volumes:
   baza:

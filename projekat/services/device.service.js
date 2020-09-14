@@ -8,16 +8,24 @@ module.exports = {
             if (typeof this.timer !== 'undefined')
                 clearInterval(this.timer);
             this.timer = setInterval(function() {
-                let data;
-                switch (this.source) {
-                    case 0: data = this.AEP[this.count++].split(','); break;
-                    case 1: data = this.COMED[this.count++].split(','); break;
-                    case 2: data = this.DAYTON[this.count++].split(','); break;
-                }
+                let dataAEP = this.AEP[this.count++].split(',');
+                let dataCOMED = this.COMED[this.count++].split(',');
+                let dataDAYTON = this.DAYTON[this.count++].split(',');
 
                 this.broker.emit("data.read", {
-                    timestamp: data[1],
-                    reading: data[2]
+                    source: "AEP",
+                    timestamp: dataAEP[0],
+                    reading: dataAEP[1]
+                });
+                this.broker.emit("data.read", {
+                    source: "COMED",
+                    timestamp: dataCOMED[0],
+                    reading: dataCOMED[1]
+                });
+                this.broker.emit("data.read", {
+                    source: "DAYTON",
+                    timestamp: dataCOMED[0],
+                    reading: dataCOMED[1]
                 });
 
             }, this.interval);
@@ -26,14 +34,7 @@ module.exports = {
 
     events: {
          // command servis ce vrsiti provere validnosti pre nego sto gurne payload preko nats
-        "change.source": {
-            group: 'other',
-            handler(payload) {
-                this.source = payload.source;
-            }
-        },
-
-        "change.interval": {
+        "device.interval": {
             group: 'other',
             handler(payload) {
                 this.interval = payload.interval;
@@ -54,7 +55,6 @@ module.exports = {
     },
 
     created() {
-        this.source = 0; // 0 - aep, 1 - comed, 2 - dayton
         this.interval = 1000;
         this.AEP = fs.readFileSync('../data/AEP_hourly.csv').toString().split('/n');
         this.COMED = fs.readFileSync('../data/COMED_hourly.csv').toString().split('/n');

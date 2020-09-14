@@ -5,7 +5,6 @@
   "private": true,
   "dependencies": {
     "express": "^4.17.1",
-    "influx": "^5.6.3",
     "moleculer": "^0.14.10",
     "nats": "^1.4.12"
   },
