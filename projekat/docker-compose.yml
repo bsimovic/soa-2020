@@ -10,9 +10,8 @@ services:
       SERVICES: device
     depends_on:
       - nats
-    ports:
-  
-  device:
+
+  data:
     build:
       context: .
     env_file: docker-compose.env
@@ -22,7 +21,6 @@ services:
     depends_on:
       - nats
       - influx
-    ports:
 
   analytics:
     build:
