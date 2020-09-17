@@ -11,21 +11,21 @@ module.exports = {
                 let dataAEP = this.AEP[this.count++].split(',');
                 let dataCOMED = this.COMED[this.count++].split(',');
                 let dataDAYTON = this.DAYTON[this.count++].split(',');
-
+    
                 this.broker.emit("data.read", {
                     source: "AEP",
                     timestamp: dataAEP[0],
-                    reading: dataAEP[1]
+                    power: dataAEP[1]
                 });
                 this.broker.emit("data.read", {
                     source: "COMED",
                     timestamp: dataCOMED[0],
-                    reading: dataCOMED[1]
+                    power: dataCOMED[1]
                 });
                 this.broker.emit("data.read", {
                     source: "DAYTON",
-                    timestamp: dataCOMED[0],
-                    reading: dataCOMED[1]
+                    timestamp: dataDAYTON[0],
+                    power: dataDAYTON[1]
                 });
 
             }, this.interval);

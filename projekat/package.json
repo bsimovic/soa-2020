@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "moleculer": "^0.14.10",
+    "mongoose": "^5.10.5",
     "nats": "^1.4.12"
   },
   "scripts": {
