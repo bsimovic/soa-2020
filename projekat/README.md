@@ -8,4 +8,3 @@ Fajlovi koji se koriste su:
 - COMED_hourly.csv
 - DAYTON_hourly.csv
 
-Svaki fajl odgovara jednom izvoru podataka. Izvor se može promeniti slanjem komande.

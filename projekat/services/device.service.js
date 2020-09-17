@@ -15,17 +15,17 @@ module.exports = {
                 this.broker.emit("data.read", {
                     source: "AEP",
                     timestamp: dataAEP[0],
-                    power: dataAEP[1]
+                    power: dataAEP[1] * this.factor
                 });
                 this.broker.emit("data.read", {
                     source: "COMED",
                     timestamp: dataCOMED[0],
-                    power: dataCOMED[1]
+                    power: dataCOMED[1] * this.factor
                 });
                 this.broker.emit("data.read", {
                     source: "DAYTON",
                     timestamp: dataDAYTON[0],
-                    power: dataDAYTON[1]
+                    power: dataDAYTON[1] * this.factor
                 });
 
             }, this.interval);
@@ -40,22 +40,31 @@ module.exports = {
                 this.interval = payload.interval;
                 this.reset();
             }
+        },
+
+        "device.poweroutput": {
+            group: 'other',
+            handler(payload) {
+                this.factor = payload.factor;
+            }
         }
     },
 
     actions: {
-        getMetadata: {
-            async handler() {
+        get: {
+            async handler(ctx) {
                 return {
                     source: this.source,
-                    interval: this.interval
+                    interval: this.interval,
+                    factor: this.factor
                 }
             }
         }
     },
 
     created() {
-        this.interval = 1000;
+        this.interval = 2000;
+        this.factor = 1;
         this.AEP = fs.readFileSync('../data/AEP_hourly.csv').toString().split('/n');
         this.COMED = fs.readFileSync('../data/COMED_hourly.csv').toString().split('/n');
         this.DAYTON = fs.readFileSync('../data/DAYTON_hourly.csv').toString().split('/n');

@@ -18,7 +18,7 @@ module.exports = {
             }
         },
 
-        put: {
+        post: {
             params: {
                 source: {type: "string"},
                 timestamp: {type: "string"},
