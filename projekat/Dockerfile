@@ -1,7 +1,7 @@
 FROM node:latest
 RUN mkdir /app
 WORKDIR /app
-COPY package.json package-lock.json ./
+ADD package*.json /app/
 RUN npm install
-COPY . .
+COPY . /app/
 CMD ["npm", "start"]

@@ -58,16 +58,16 @@ module.exports = {
         api.use(cors());
 
         //RUTE:
-        api.get('/deviceParams', this.deviceGet);
-        api.post('/setInterval', this.devicePost);
-        api.get('/dbQuery', this.dataGet);
-        api.post('/dbSend', this.dataPost);
-        api.get('/db', this.dataGetAll);
-        api.get('/listCommands', this.commandGet);
-        api.post('/changeCommand', this.commandPost);
-        api.get('/analyticsQuery', this.analyticsGet);
-        api.post('/analyticsThreshold', this.analyticsPost);
-        api.get('/analytics', this.analyticsGetAll);
+        api.get('/deviceParams', this.deviceGet); // vrati parametre merenja
+        api.post('/setInterval', this.devicePost); // postavi interval merenja
+        api.get('/dbQuery', this.dataGet); // pretrazi bazu po power
+        api.post('/dbSend', this.dataPost); // ubaci u bazu
+        api.get('/db', this.dataGetAll); // vrati celu bazu
+        api.get('/listCommands', this.commandGet); // izlistaj komande
+        api.post('/changeCommand', this.commandPost); // izmeni parametre komande
+        api.get('/analyticsQuery', this.analyticsGet); // pretrazi analytics bazu po tipu dogadjaja
+        api.post('/analyticsThreshold', this.analyticsPost); // postavi granice za power na osnovu kojih ce biti belezeni dogadjaji
+        api.get('/analytics', this.analyticsGetAll); // vrati celu analytics bazu
 
         api.listen(3000);
     }

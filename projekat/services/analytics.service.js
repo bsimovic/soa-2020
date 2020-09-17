@@ -24,7 +24,7 @@ module.exports = {
             async handler(ctx) {
                 this.lowerThreshold = ctx.params.lower;
                 this.upperThreshold = ctx.params.upper;
-                return "Success";
+                return ("Threshold updated to: " + ctx.params);
             }
         },
 
@@ -42,11 +42,11 @@ module.exports = {
             group: "other",
             handler(payload) {
                 if (this.powerTooHigh(payload.power)) {
-                    this.broker.emit('command.increasepower', null);
+                    this.broker.emit('command.decreasepower', null);
                     this.notify(payload, 'powerTooHigh');
                 }
                 else if (this.powerTooLow(payload.power)) {
-                    this.broker.emit('command.decreasepower', null);
+                    this.broker.emit('command.increasepower', null);
                     this.notify(payload, 'powerTooLow');
                 }
             }
@@ -81,8 +81,8 @@ module.exports = {
     },
 
     created() {
-        this.upperThreshold = 17000;
-        this.lowerThreshold = 11000;
+        this.upperThreshold = 13500;
+        this.lowerThreshold = 12000;
         const AEvent = new mongo.Schema({
             type: String,
             timestamp: String,
@@ -90,7 +90,7 @@ module.exports = {
             upperThreshold: Number,
             lowerThreshold: Number
         });
-        mongo.connect('mongodb://mongo:27017/analyticsdb');
+        mongo.connect('mongodb://mongodb:27017/analyticsdb');
         this.model = mongo.model('event', AEvent);
     },
 

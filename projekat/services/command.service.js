@@ -36,6 +36,8 @@ module.exports = {
                     if (ctx.params.paramName === "factor")
                         this.decFactor = ctx.params.paramValue;
                 }
+
+                return ("Received " + ctx.params);
             }
         }
     },
@@ -44,20 +46,20 @@ module.exports = {
         "command.increasepower": {
             group: 'other',
             handler(payload) {
-                this.broker.emit('device.poweroutput', this.incFactor);
+                this.broker.emit('device.poweroutput', {factor: this.incFactor});
             }
         },
 
         "command.decreasepower": {
             group: "other",
             handler(payload) {
-                this.broker.emit('device.poweroutput', this.decFactor);
+                this.broker.emit('device.poweroutput', {factor: this.decFactor});
             }
         }
     },
 
     created() {
         this.incFactor = 0.05;
-        this.decFactor = 0.05;
+        this.decFactor = -0.05;
     }
 }

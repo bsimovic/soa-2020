@@ -7,13 +7,13 @@ module.exports = {
         // vrati sve iz baze gde je power izmedju min i max
         get: {
             params: {
-                min: {type: "number"},
-                max: {type: "number"}
+                min: {type: "string"},
+                max: {type: "string"}
             },
 
             async handler(ctx) {
                 
-                let doc = await this.model.find({$and: [{power: {$lte: ctx.params.max}}, {power: {$gte: ctx.params.min}}]});
+                let doc = await this.model.find({$and: [{power: {$lte: parseInt(ctx.params.max)}}, {power: {$gte: parseInt(ctx.params.min)}}]});
                 return doc;
             }
         },
@@ -27,7 +27,7 @@ module.exports = {
             async handler(ctx) {
                 let doc = new this.model({timestamp: ctx.params.timestamp, power: ctx.params.power});
                 doc.save();
-                return "Success";
+                return ("Successfuly added " + ctx.params);
             }
         },
 
@@ -55,7 +55,7 @@ module.exports = {
             timestamp: String,
             power: Number
         });
-        mongo.connect('mongodb://mongo:27017/maindb');
+        mongo.connect('mongodb://mongodb:27017/maindb');
         this.model = mongo.model('reading', Reading);
     },
 

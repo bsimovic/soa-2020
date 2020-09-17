@@ -7,12 +7,17 @@ module.exports = {
         reset() {
             if (typeof this.timer !== 'undefined')
                 clearInterval(this.timer);
-            this.timer = setInterval(function() {
-                let data = this.DATA[this.count++].split(',');
-
+            this.timer = setInterval(() => {
+                
+                
+                let d = this.data[this.count++].split(',');
+                console.log("COUNT: " + this.count);
+                console.log("TIMESTAMP: " + d[0]);
+                console.log("POWER: " + (parseFloat(d[1]) * this.factor));
+                console.log("FACTOR: " + this.factor);
                 this.broker.emit("data.read", {
-                    timestamp: data[0],
-                    power: data[1] * this.factor
+                    timestamp: d[0],
+                    power: parseFloat(d[1]) * this.factor
                 });
             }, this.interval);
         }
@@ -46,16 +51,16 @@ module.exports = {
             async handler(ctx) {
                 this.interval = ctx.params.interval;
                 this.reset();
-                return "Success";
+                return ("Interval changed to " + this.interval);
             }
             
         }
     },
 
     created() {
-        this.interval = 2000;
+        this.interval = 5000;
         this.factor = 1;
-        this.DATA = fs.readFileSync('../data/AEP_hourly.csv').toString().split('/n');
+        this.data = fs.readFileSync('data/AEP_hourly.csv').toString().split('\n');
         this.count = 1;
         this.timer = undefined;
         this.reset();
