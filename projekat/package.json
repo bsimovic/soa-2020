@@ -4,6 +4,8 @@
   "author": "bsimovic",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "moleculer": "^0.14.10",
     "mongoose": "^5.10.5",

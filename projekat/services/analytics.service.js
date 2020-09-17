@@ -26,6 +26,14 @@ module.exports = {
                 this.upperThreshold = ctx.params.upper;
                 return "Success";
             }
+        },
+
+        // vrati sve iz baze
+        getAll: {
+            async handler(ctx) {
+                let doc = await this.model.find({});
+                return doc;
+            }
         }
     },
 
@@ -84,5 +92,9 @@ module.exports = {
         });
         mongo.connect('mongodb://mongo:27017/analyticsdb');
         this.model = mongo.model('event', AEvent);
+    },
+
+    stopped() {
+        mongo.disconnect();
     }
 }

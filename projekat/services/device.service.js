@@ -19,19 +19,10 @@ module.exports = {
     },
 
     events: {
-         // command servis ce vrsiti provere validnosti pre nego sto gurne payload preko nats
-        "device.interval": {
-            group: 'other',
-            handler(payload) {
-                this.interval = payload.interval;
-                this.reset();
-            }
-        },
-
         "device.poweroutput": {
             group: 'other',
             handler(payload) {
-                this.factor = payload.factor;
+                this.factor += payload.factor;
             }
         }
     },
@@ -42,8 +33,22 @@ module.exports = {
                 return {
                     interval: this.interval,
                     factor: this.factor
-                }
+                };
             }
+        },
+
+        // postavi interval
+        post: {
+            params: {
+                interval: {type: 'number'}
+            },
+
+            async handler(ctx) {
+                this.interval = ctx.params.interval;
+                this.reset();
+                return "Success";
+            }
+            
         }
     },
 

@@ -3,41 +3,61 @@
 module.exports = {
     name: "command",
     actions: {
+        // vrati listu komandi i trenutne parametre
         get: {
             async handler(ctx) {
                 return {
                     commands: [
                         {
-                            name: 'changeInterval', params: {interval: 'number'}
+                            name: 'increasePower', params: {factor: this.incFactor}
                         },
                         {
-                            name: 'powerOutput', params: {factor: 'number'}
+                            name: 'decreasePower', params: {factor: this.decFactor}
                         }
                     ]
+                };
+            }
+        },
+
+        // postavi parametar
+        post: {
+            params: {
+                commandName: {type: "string"},
+                paramName: {type: "string"},
+                paramValue: {type: "number"}
+            },
+
+            async handler(ctx) {
+                if (ctx.params.commandName === "increasePower") {
+                    if (ctx.params.paramName === "factor")
+                        this.incFactor = ctx.params.paramValue;
+                }
+                else if (ctx.params.commandName === "decreasePower") {
+                    if (ctx.params.paramName === "factor")
+                        this.decFactor = ctx.params.paramValue;
                 }
             }
         }
     },
 
     events: {
-        "command.changeinterval": {
+        "command.increasepower": {
             group: 'other',
             handler(payload) {
-                if (!(isNaN(payload.interval)) && payload.interval >= 200)
-                    this.broker.emit('device.interval', payload.interval);
-                else
-                    console.log("command.changeinterval: bad interval");
+                this.broker.emit('device.poweroutput', this.incFactor);
             }
         },
 
-        "command.poweroutput": {
+        "command.decreasepower": {
             group: "other",
             handler(payload) {
-                if (!(isNaN(payload.factor)) && payload.factor >= 0 && payload.factor <= 1)
-                    this.broker.emit('device.poweroutput', payload.factor);
-                else
-                    console.log("command.poweroutput: bad factor");
+                this.broker.emit('device.poweroutput', this.decFactor);
             }
         }
+    },
+
+    created() {
+        this.incFactor = 0.05;
+        this.decFactor = 0.05;
     }
 }
