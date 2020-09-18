@@ -14,8 +14,8 @@ Broker je NATS a baza je Mongo.
 Sistem prikuplja podatke iz fajla `data\podaci.csv`, podaci su potrošena električna energija po satu u SAD-u u megavatima i timestamp kada je izmerena vrednost. Ukoliko `analytics` servis primeti da je izmerena snaga manja ili veća od unapred određenih granica, `command` servis će postlati zahtev `device` servisu koji će procentualno povećati/smanjiti dalje merene vrednosti. `Analytics` servis ima sopstvenu bazu podataka u kojoj ubacuje izmerenu vrednost i timestamp kad god je vrednost izvan granica.  
 
 Endpointi:  
-* `/deviceparams` - GET - Vraća parametre očitavanja, uključujući faktor kojim se množi snaga
-* `/setInterval` - POST - Postavi interval
+* `/deviceparams` - GET - Vraća parametre očitavanja, interval očitavanja i faktor kojim se množi snaga
+* `/setInterval` - POST - Postavi interval očitavanja
 * `/dbQuery` - GET - Vrati vrednosti iz baze gde je snaga između prosleđenih vrednosti
 * `/dbSend` - POST - Ubaci u bazu
 * `/db` - GET - Vrati celu bazu
