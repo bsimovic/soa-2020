@@ -1,0 +1,13 @@
+body, #notifications {
+    display: flex;
+    flex-direction: column;
+}
+
+#notifications {
+    border-top: 10px solid black;
+    margin-top: 5px;
+}
+
+#title {
+    margin-bottom: 5px;
+}

@@ -63,6 +63,17 @@ services:
       - nats
     ports:
       - 3000:3000
+  
+  dashboard:
+    build:
+      context: .
+    env_file: docker-compose.env
+    environment:
+      NODEID: "node-dashboard"
+      SERVICES: dashboard
+    ports:
+      - 8080:8080
+
     
 volumes:
   baza:

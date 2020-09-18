@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "91220e97-e67c-46ee-9cb0-b2c90d669066",
+		"name": "soaprojekat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "deviceParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/deviceParams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"deviceParams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "db",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/db",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dbQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/dbQuery?min=13000&max=14000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dbQuery"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "13000"
+						},
+						{
+							"key": "max",
+							"value": "14000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setInterval",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"interval\": 10000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/setInterval",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"setInterval"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dbSend",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestamp\": \"23\",\r\n    \"power\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dbSend",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dbSend"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listCommands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/listCommands",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"listCommands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeCommand",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"commandName\": \"decreasePower\",\r\n    \"paramName\": \"factor\",\r\n    \"paramValue\": 0.1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/changeCommand",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"changeCommand"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "analyticsThreshold",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"upper\": 15000,\r\n    \"lower\": 13000\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/analyticsThreshold",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"analyticsThreshold"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/analytics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"analytics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "analyticsQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/analyticsQuery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"analyticsQuery"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

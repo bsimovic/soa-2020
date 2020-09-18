@@ -8,13 +8,14 @@ module.exports = {
             if (typeof this.timer !== 'undefined')
                 clearInterval(this.timer);
             this.timer = setInterval(() => {
-                
+                console.log("COUNT: " + this.count);
+                console.log("FACTOR: " + this.factor);
                 
                 let d = this.data[this.count++].split(',');
-                console.log("COUNT: " + this.count);
                 console.log("TIMESTAMP: " + d[0]);
                 console.log("POWER: " + (parseFloat(d[1]) * this.factor));
-                console.log("FACTOR: " + this.factor);
+                
+               
                 this.broker.emit("data.read", {
                     timestamp: d[0],
                     power: parseFloat(d[1]) * this.factor
@@ -53,14 +54,13 @@ module.exports = {
                 this.reset();
                 return ("Interval changed to " + this.interval);
             }
-            
         }
     },
 
     created() {
         this.interval = 5000;
         this.factor = 1;
-        this.data = fs.readFileSync('data/AEP_hourly.csv').toString().split('\n');
+        this.data = fs.readFileSync('data/podaci.csv').toString().split('\n');
         this.count = 1;
         this.timer = undefined;
         this.reset();

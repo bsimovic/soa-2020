@@ -37,7 +37,7 @@ module.exports = {
                         this.decFactor = ctx.params.paramValue;
                 }
 
-                return ("Received " + ctx.params);
+                return ("Success");
             }
         }
     },

@@ -4,13 +4,10 @@ const mongo = require('mongoose');
 module.exports = {
     name: "analytics",
     actions: {
-        // vrati svaki event odredjenog tipa
+        // vrati zadnji ubacen dogadjaj
         get: {
-            params: {
-                type: {type: "string"}
-            },
             async handler(ctx) {
-                let doc = await this.model.find({type: ctx.params.type});
+                let doc = await this.model.find().sort({_id: -1}).limit(1);
                 return doc;
             }
         },
@@ -24,7 +21,7 @@ module.exports = {
             async handler(ctx) {
                 this.lowerThreshold = ctx.params.lower;
                 this.upperThreshold = ctx.params.upper;
-                return ("Threshold updated to: " + ctx.params);
+                return ("Threshold updated to: " + ctx.params.lower + '-' + ctx.params.upper);
             }
         },
 
@@ -73,15 +70,11 @@ module.exports = {
             }
             let doc = new this.model(data);
             doc.save();
-
-            
-
-            //TODO: POSALJI NA DASHBOARD
         }
     },
 
     created() {
-        this.upperThreshold = 13500;
+        this.upperThreshold = 14000;
         this.lowerThreshold = 12000;
         const AEvent = new mongo.Schema({
             type: String,

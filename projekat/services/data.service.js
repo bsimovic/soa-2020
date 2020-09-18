@@ -13,7 +13,7 @@ module.exports = {
 
             async handler(ctx) {
                 
-                let doc = await this.model.find({$and: [{power: {$lte: parseInt(ctx.params.max)}}, {power: {$gte: parseInt(ctx.params.min)}}]});
+                let doc = await this.model.find({$and: [{power: {$lte: parseFloat(ctx.params.max)}}, {power: {$gte: parseFloat(ctx.params.min)}}]});
                 return doc;
             }
         },
@@ -25,9 +25,10 @@ module.exports = {
             },
 
             async handler(ctx) {
+                this.broker.emit("analytics.analyze", ctx.params);
                 let doc = new this.model({timestamp: ctx.params.timestamp, power: ctx.params.power});
                 doc.save();
-                return ("Successfuly added " + ctx.params);
+                return ("Successfuly added " + ctx.params.timestamp + " " + ctx.params.power);
             }
         },
 
@@ -45,7 +46,6 @@ module.exports = {
             group: "other",
             handler(payload) {
                 this.broker.call("data.post", payload);
-                this.broker.emit("analytics.analyze", payload);
             }
         }
     },
