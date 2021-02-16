@@ -5,7 +5,7 @@
   "author": "bsimovic",
   "dependencies": {
     "mqtt": "^4.0.0",
-    "systeminformation": "^4.23.8"
+    "systeminformation": "^5.3.1"
   },
   "private": true
 }
